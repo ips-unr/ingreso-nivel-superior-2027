@@ -1,0 +1,7 @@
+isotipo.png  -> LISTO. Isotipo 120 anios (sin texto, color, sin fondo).
+                Se usa como favicon, marca de agua al 6% en el hero
+                y marca en la cabecera.
+
+Opcional, si los queres sumar desde frontend/public/ del portal:
+  logo-ips.png         horizontal a color (reemplazaria al isotipo en la cabecera)
+  logo-ips-blanco.png  para bloques de fondo bordo

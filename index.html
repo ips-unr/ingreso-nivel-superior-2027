@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#6d0037">
+<title>Ingreso Nivel Superior 2027</title>
+<meta name="description" content="Cursillo de ingreso a Nivel Superior 2027 — Matemática y Física. Cronograma de encuentros virtuales, presenciales y evaluaciones.">
+<link rel="icon" href="assets/isotipo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* ============================================================
+   Tokens — copiados del sistema del Portal de Ingreso IPS.
+   Para re-tematizar el sitio entero alcanza con los siete --vino-*.
+   ============================================================ */
+:root{
+  --vino-900:#3f001f;
+  --vino-800:#54002b;
+  --vino-700:#6d0037;
+  --vino-600:#87104b;
+  --vino-500:#a83466;
+  --vino-100:#f3d6e1;
+  --vino-50:#fbeef3;
+
+  --tinta:#1b1620;
+  --tinta-suave:#574f59;
+  --tinta-tenue:#8b8590;
+  --borde:#e7e1dd;
+  --borde-fuerte:#cdc5be;
+  --crema-100:#ffffff;
+  --crema-200:#f4f1ee;
+
+  --verde:#1f6b3a;      --verde-suave:#e5f3eb;
+  --ambar:#8a5a00;      --ambar-suave:#fdf2d6;
+  --rojo:#b3261e;       --rojo-suave:#fde7e5;
+
+  /* Paleta categórica (píldoras): fondo pastel + texto saturado */
+  --cat-azul-bg:#e7f0fc;    --cat-azul-tx:#1b4f8f;
+  --cat-verde-bg:#e2f6ef;   --cat-verde-tx:#0f6b4c;
+  --cat-rojo-bg:#fdeceb;    --cat-rojo-tx:#96271f;
+  --cat-violeta-bg:#eeecf9; --cat-violeta-tx:#3b2e85;
+  --cat-rosa-bg:#fdedf3;    --cat-rosa-tx:#8f3560;
+  --cat-ambar-bg:#fdf2e2;   --cat-ambar-tx:#8a5300;
+  --cat-gris-bg:#f0eff1;    --cat-gris-tx:#5a5560;
+
+  --radio:16px;
+  --radio-sm:10px;
+  --sombra:0 18px 40px rgba(61,14,34,.10);
+  --sombra-sm:0 4px 14px rgba(61,14,34,.07);
+
+  --serif:"Poppins",system-ui,sans-serif;   /* histórico: es una sans geométrica */
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.55;
+  color:var(--tinta);
+  -webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(circle at 100% -10%, var(--vino-50), transparent 45%),
+    #f6f3f0;
+}
+h1,h2,h3{margin:0;font-family:var(--serif);font-weight:700}
+p{margin:0}
+
+/* ============================================================
+   Estructura
+   ============================================================ */
+.app{display:flex;flex-direction:column;min-height:100vh}
+.contenido{flex:1;display:flex;justify-content:center;padding:48px 24px}
+.landing{width:100%;max-width:1080px}
+
+/* ---- Cabecera ---- */
+.cabecera{
+  position:sticky;top:0;z-index:20;background:#fff;
+  border-top:4px solid var(--vino-700);
+  border-bottom:1px solid var(--borde);
+}
+.cabecera-inner{
+  max-width:1080px;margin-inline:auto;padding:12px 24px;
+  display:flex;align-items:center;gap:16px;
+}
+.cabecera img{height:54px;width:auto;display:block}
+.cabecera .marca-txt{
+  font-family:var(--serif);font-weight:700;font-size:1.15rem;line-height:1.1;
+  color:var(--vino-700);letter-spacing:-.01em;
+}
+.cabecera .marca-txt small{display:block;font-family:var(--sans);font-weight:600;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-tenue);margin-top:2px}
+.cabecera-titulo{
+  font-family:var(--serif);font-weight:600;font-size:1.05rem;color:var(--vino-700);
+  padding-left:16px;border-left:1px solid var(--borde);
+}
+@media (max-width:560px){
+  .cabecera img{height:44px}
+  .cabecera-titulo{display:none}
+}
+
+/* ---- Kicker ---- */
+.kicker,.hero-kicker{
+  font-weight:600;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--vino-700);
+}
+
+/* ---- Hero ---- */
+.panel{
+  background:#fff;border:1px solid var(--borde);border-radius:var(--radio);
+  padding:42px 44px;box-shadow:var(--sombra);
+}
+.panel-hero{position:relative;overflow:hidden;border-top:4px solid var(--vino-700)}
+.panel-hero .marca-agua{
+  position:absolute;top:-30px;right:-30px;width:280px;opacity:.06;pointer-events:none;
+}
+.panel-hero>*{position:relative}
+.hero-titulo{
+  font-size:clamp(2rem,3.4vw + 1rem,3rem);line-height:1.08;color:var(--vino-900);
+  margin-top:10px;
+}
+.lead{font-size:1.05rem;color:var(--tinta-suave);max-width:62ch;margin-top:14px}
+
+.dash-grilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));gap:14px;margin-top:28px}
+.dash-tarjeta{
+  background:var(--vino-50);border:1px solid var(--vino-100);
+  border-radius:var(--radio-sm);padding:14px 16px;
+}
+.dash-tarjeta .rotulo{
+  display:block;font-size:.75rem;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--tinta-suave);
+}
+.dash-tarjeta .valor{
+  display:block;font-family:var(--serif);font-weight:700;font-size:1.6rem;
+  color:var(--vino-900);line-height:1.2;margin-top:4px;
+}
+.dash-tarjeta .valor.mono{font-family:var(--mono);font-size:1.3rem;font-weight:500}
+
+/* ---- Secciones ---- */
+.seccion{margin-top:34px}
+.seccion-titulo{font-size:1.5rem;color:var(--vino-900)}
+.seccion-head{margin-bottom:18px;max-width:70ch}
+.seccion-head .lead{margin-top:8px}
+
+/* ---- Tarjetas de paso ---- */
+.grilla-pasos{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:18px}
+.paso-card{
+  background:#fff;border:1px solid var(--borde);border-top:3px solid var(--vino-700);
+  border-radius:var(--radio);padding:22px 22px 20px;box-shadow:var(--sombra-sm);
+}
+.paso-card h3{font-size:1.15rem;color:var(--vino-900);margin-top:8px}
+.paso-card p{color:var(--tinta-suave);font-size:.95rem;margin-top:8px}
+.paso-card ul{list-style:none;margin:14px 0 0;padding:0}
+.paso-card li{display:flex;gap:12px;align-items:baseline;padding:8px 0;border-top:1px solid var(--borde)}
+.paso-card li:first-child{border-top:0}
+.paso-card li b{font-family:var(--mono);font-weight:500;font-size:.85rem;color:var(--vino-700);flex:none;white-space:nowrap}
+.paso-card li span{color:var(--tinta-suave);font-size:.93rem}
+
+/* ---- Badges de evento (convención del cronograma del portal) ---- */
+.evento-badge{
+  display:inline-flex;align-items:center;gap:7px;border-radius:999px;
+  padding:3px 9px;font-size:.7rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.04em;border:1px solid transparent;
+}
+.ev-virtual   {background:var(--cat-violeta-bg);color:var(--cat-violeta-tx)}
+.ev-presencial{background:var(--cat-ambar-bg);  color:var(--cat-ambar-tx)}
+.ev-inicio    {background:var(--cat-verde-bg);  color:var(--cat-verde-tx)}
+.ev-parcial   {background:var(--vino-700);      color:#fff}
+.ev-recu      {background:var(--cat-rojo-bg);   color:var(--cat-rojo-tx)}
+.ev-feriado   {background:var(--cat-gris-bg);   color:var(--cat-gris-tx);border-color:var(--borde)}
+.ev-finde     {background:var(--crema-200);     color:var(--tinta-tenue);border-color:var(--borde)}
+
+/* Marcas de forma: la información no depende sólo del color */
+.marca{flex:none;display:block;background:currentColor}
+.m-punto {width:5px;height:5px;border-radius:50%}
+.m-barra {width:11px;height:4px;border-radius:2px}
+.m-rombo {width:7px;height:7px;border-radius:2px;transform:rotate(45deg)}
+.m-anillo{width:7px;height:7px;border-radius:50%;background:transparent;box-shadow:0 0 0 2px currentColor inset}
+
+/* ---- Leyenda ---- */
+.leyenda{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.leyenda .evento-badge{font-size:.72rem;padding:5px 11px}
+
+/* ---- Calendarios ---- */
+.cal-grilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(290px,100%),1fr));gap:18px}
+.mes{
+  background:#fff;border:1px solid var(--borde);border-radius:var(--radio);
+  padding:20px 18px 18px;box-shadow:var(--sombra-sm);
+}
+.mes h3{
+  font-size:1.05rem;text-align:center;color:var(--vino-900);
+  text-transform:uppercase;letter-spacing:.06em;
+}
+.mes h3 span{
+  display:block;font-family:var(--sans);font-weight:600;font-size:.7rem;
+  letter-spacing:.18em;color:var(--tinta-tenue);margin-top:3px;
+}
+.dow,.dias{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.dow{margin:14px 0 6px}
+.dow span{
+  text-align:center;font-size:.7rem;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--tinta-suave);
+}
+.dow span.finde{color:var(--tinta-tenue)}
+
+.dia{
+  position:relative;aspect-ratio:1/1;border-radius:var(--radio-sm);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  font-size:.92rem;font-weight:600;font-variant-numeric:tabular-nums;color:var(--tinta);
+  border:1px solid transparent;
+}
+.dia.hueco{visibility:hidden}
+.dia.finde{background:var(--crema-200);color:var(--tinta-tenue)}
+.dia .marca{opacity:0}
+.dia.ev{cursor:pointer}
+.dia.ev .marca{opacity:1}
+
+/* Los cinco exámenes caen sábado, así que estos pares .dia.ev-* tienen que ir
+   DESPUÉS de .dia.finde: con la misma especificidad gana el último, y si no
+   los días de parcial se pintaban como fin de semana. */
+.dia.ev-virtual   {background:var(--cat-violeta-bg);color:var(--cat-violeta-tx);border-color:rgba(59,46,133,.18)}
+.dia.ev-presencial{background:var(--cat-ambar-bg);  color:var(--cat-ambar-tx);  border-color:rgba(138,83,0,.18)}
+.dia.ev-inicio    {background:var(--cat-verde-bg);  color:var(--cat-verde-tx);  border-width:1.5px;border-color:currentColor}
+.dia.ev-parcial   {background:var(--vino-700);      color:#fff}
+.dia.ev-recu      {background:var(--cat-rojo-bg);   color:var(--cat-rojo-tx);   border-width:1.5px;border-color:currentColor}
+/* El feriado se lee como fin de semana aunque caiga entre semana: mismo gris,
+   y lo único que lo distingue es la marca y el detalle al pasar el cursor. */
+.dia.ev-feriado   {background:var(--crema-200);     color:var(--tinta-tenue)}
+.dia.ev{transition:box-shadow .15s ease,border-color .15s ease,transform .05s ease}
+.dia.ev:hover{box-shadow:0 0 0 1.5px var(--vino-500) inset}
+.dia.ev:active{transform:translateY(1px)}
+.dia.ev:focus-visible{
+  outline:none;border-color:var(--vino-600);
+  box-shadow:0 0 0 3px var(--vino-100);
+}
+
+/* ---- Tabla de evaluaciones ---- */
+.tabla-wrap{overflow-x:auto;border:1px solid var(--borde);border-radius:var(--radio-sm);background:#fff}
+.tabla{width:100%;border-collapse:collapse;font-size:.9rem;min-width:640px}
+.tabla thead{background:var(--vino-700);color:#fff}
+.tabla th{font-size:.82rem;text-transform:uppercase;letter-spacing:.04em;font-weight:600}
+.tabla th,.tabla td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--borde)}
+.tabla tbody tr:nth-child(odd){background:var(--vino-50)}
+.tabla tbody tr:hover{background:var(--vino-100)}
+.tabla td.fecha{font-family:var(--mono);font-weight:500;color:var(--vino-900);white-space:nowrap}
+.celda-sub{display:block;font-size:.78rem;color:var(--tinta-tenue)}
+
+/* ---- Aviso ---- */
+.encabezado-exacto{
+  background:var(--vino-50);border-left:4px solid var(--vino-600);
+  border-radius:var(--radio-sm);padding:12px 16px;font-size:.95rem;
+  color:var(--tinta-suave);margin-top:18px;
+}
+.encabezado-exacto b{color:var(--vino-900)}
+
+/* ---- Pie ---- */
+.pie{
+  background:var(--crema-200);border-top:1px solid var(--borde);
+  padding:22px 24px;color:var(--tinta-tenue);font-size:.85rem;
+}
+.pie-inner{max-width:1080px;margin-inline:auto}
+.pie strong{color:var(--tinta-suave);font-weight:600}
+
+/* ---- Popover del día ---- */
+#pop{
+  position:fixed;z-index:50;max-width:290px;background:#fff;
+  border:1px solid var(--borde);border-top:3px solid var(--vino-700);
+  border-radius:var(--radio);padding:16px 18px;box-shadow:var(--sombra);
+  pointer-events:none;opacity:0;transition:opacity .15s ease;
+}
+#pop[data-abierto="true"]{opacity:1}
+#pop .pop-titulo{font-family:var(--serif);font-weight:700;font-size:1.05rem;color:var(--vino-900);margin-top:8px;line-height:1.25}
+#pop ul{list-style:none;margin:12px 0 0;padding:0}
+#pop li{display:flex;gap:10px;align-items:baseline;padding:6px 0;border-top:1px solid var(--borde)}
+#pop li:first-child{border-top:0}
+#pop li b{font-family:var(--mono);font-weight:500;font-size:.8rem;color:var(--vino-700);flex:none;white-space:nowrap}
+#pop li span{font-size:.88rem;color:var(--tinta-suave)}
+#pop .pop-nota{margin-top:12px;padding-top:10px;border-top:1px solid var(--borde);font-size:.82rem;color:var(--tinta-tenue)}
+
+/* ============================================================
+   Breakpoint principal
+   ============================================================ */
+@media (max-width:720px){
+  .contenido{padding:24px 14px}
+  .panel{padding:26px 22px}
+  .cabecera-inner{padding:10px 14px}
+}
+
+/* ============================================================
+   Movimiento reducido
+   ============================================================ */
+@media (prefers-reduced-motion:reduce){
+  *{transition-duration:.01ms !important;animation-duration:.01ms !important}
+}
+
+/* ============================================================
+   Impresión — el cronograma se imprime de verdad.
+   Fondos reforzados con borde: el color de fondo puede venir apagado.
+   ============================================================ */
+@media print{
+  @page{size:A4 landscape;margin:12mm}
+  *{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  body{background:#fff}
+  .cabecera,.pie,.no-print{display:none !important}
+  .solo-print{display:block !important}
+  .contenido{padding:0}
+  .panel,.mes,.paso-card,.tabla-wrap{box-shadow:none}
+  .cal-grilla{grid-template-columns:repeat(3,1fr)}
+  .dia.ev{border:1px solid currentColor}
+  .dia.finde{border:1px solid var(--borde-fuerte)}
+  .tabla{font-size:9pt;min-width:0}
+  .tabla th,.tabla td{border-bottom:1px solid #999}
+  .tabla thead{background:#ddd;color:#000}
+  .seccion{break-inside:avoid}
+}
+.solo-print{display:none}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <header class="cabecera no-print">
+    <div class="cabecera-inner">
+      <img src="assets/isotipo.png" alt="" aria-hidden="true">
+      <div class="marca-txt">Instituto Politécnico Superior<small>General San Martín</small></div>
+      <div class="cabecera-titulo">Ingreso Nivel Superior 2027</div>
+    </div>
+  </header>
+
+  <main class="contenido">
+    <div class="landing">
+
+      <!-- ============ Hero ============ -->
+      <section class="panel panel-hero">
+        <img class="marca-agua" src="assets/isotipo.png" alt="" aria-hidden="true" onerror="this.remove()">
+        <div class="hero-kicker">Cursillo de ingreso · Nivel Superior</div>
+        <h1 class="hero-titulo">Ingreso Nivel Superior 2027</h1>
+        <p class="lead">
+          Matemática y Física, de octubre a diciembre. Los <b>martes</b> el encuentro es
+          virtual y sincrónico: se introduce el tema y se propone la actividad de la
+          semana. Los <b>viernes</b> son presenciales, para consulta. La actividad se
+          entrega en Moodle.
+        </p>
+
+        <div class="dash-grilla">
+          <div class="dash-tarjeta">
+            <span class="rotulo">Inicio</span>
+            <span class="valor mono">09/10</span>
+          </div>
+          <div class="dash-tarjeta">
+            <span class="rotulo">Matemática</span>
+            <span class="valor mono">18:00–19:30</span>
+          </div>
+          <div class="dash-tarjeta">
+            <span class="rotulo">Física</span>
+            <span class="valor mono">19:30–21:00</span>
+          </div>
+          <div class="dash-tarjeta">
+            <span class="rotulo">Evaluación</span>
+            <span class="valor">2 parciales</span>
+          </div>
+        </div>
+
+        <div class="encabezado-exacto">
+          <b>Inicio: viernes 9 de octubre.</b> Encuentro presencial de apertura con
+          presentación de la plataforma Moodle.
+        </div>
+      </section>
+
+      <!-- ============ Modalidad ============ -->
+      <section class="seccion">
+        <div class="seccion-head">
+          <div class="kicker">Modalidad</div>
+          <h2 class="seccion-titulo">Cómo funciona la semana</h2>
+          <p class="lead">Un tema por semana: lo abre el encuentro virtual del martes y lo cierra la consulta presencial del viernes.</p>
+        </div>
+
+        <div class="grilla-pasos">
+          <article class="paso-card">
+            <span class="evento-badge ev-virtual"><i class="marca m-punto"></i> Martes · Virtual</span>
+            <h3>Se introduce el tema</h3>
+            <p>Encuentro virtual sincrónico: se presenta el contenido de la semana y se propone la actividad.</p>
+            <ul>
+              <li><b>18:00–19:30</b><span>Consulta virtual Matemática</span></li>
+              <li><b>19:30–21:00</b><span>Consulta virtual Física</span></li>
+            </ul>
+          </article>
+
+          <article class="paso-card">
+            <span class="evento-badge ev-presencial"><i class="marca m-barra"></i> Viernes · Presencial</span>
+            <h3>Consulta cara a cara</h3>
+            <p>Espacio presencial para trabajar las dudas sobre el tema y sobre la actividad de la semana.</p>
+            <ul>
+              <li><b>18:00–19:30</b><span>Consulta presencial Matemática</span></li>
+              <li><b>19:30–21:00</b><span>Consulta presencial Física</span></li>
+            </ul>
+          </article>
+
+          <article class="paso-card">
+            <span class="evento-badge ev-parcial"><i class="marca m-rombo"></i> Entregas y evaluación</span>
+            <h3>Moodle, de martes a lunes</h3>
+            <p>La actividad propuesta el martes se entrega en Moodle hasta el lunes siguiente.</p>
+            <ul>
+              <li><b>09/10</b><span>Presentación de la plataforma Moodle</span></li>
+              <li><b>Sábados</b><span>2 parciales alternados por materia</span></li>
+              <li><b>12/12</b><span>Recuperatorio de ambas materias</span></li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============ Calendario ============ -->
+      <section class="seccion">
+        <div class="seccion-head">
+          <div class="kicker">Cronograma</div>
+          <h2 class="seccion-titulo">Calendario</h2>
+          <p class="lead no-print">Octubre, noviembre y diciembre de 2026. Pasá el cursor —o tocá— sobre un día marcado para ver sus actividades.</p>
+        </div>
+
+        <div class="leyenda">
+          <span class="evento-badge ev-virtual"><i class="marca m-punto"></i> Martes · virtual</span>
+          <span class="evento-badge ev-presencial"><i class="marca m-barra"></i> Viernes · presencial</span>
+          <span class="evento-badge ev-inicio"><i class="marca m-anillo"></i> Inicio · presencial</span>
+          <span class="evento-badge ev-parcial"><i class="marca m-rombo"></i> Parcial</span>
+          <span class="evento-badge ev-recu"><i class="marca m-rombo"></i> Recuperatorio</span>
+          <span class="evento-badge ev-finde"><i class="marca m-punto"></i> Feriado</span>
+          <span class="evento-badge ev-finde">Fin de semana</span>
+        </div>
+
+        <noscript>
+          <div class="encabezado-exacto" style="margin-bottom:18px">
+            <b>Esta página necesita JavaScript</b> para dibujar el calendario. El cronograma completo también está listado más abajo.
+          </div>
+        </noscript>
+
+        <div class="cal-grilla" id="cal"></div>
+      </section>
+
+      <!-- ============ Evaluaciones ============ -->
+      <section class="seccion">
+        <div class="seccion-head">
+          <div class="kicker">Instancias</div>
+          <h2 class="seccion-titulo">Evaluaciones</h2>
+          <p class="lead">Dos parciales por materia, alternados y siempre en sábado, más un único recuperatorio conjunto en diciembre.</p>
+        </div>
+
+        <div class="tabla-wrap">
+          <table class="tabla">
+            <thead>
+              <tr><th>Fecha</th><th>Instancia</th><th>Materia</th><th>Tipo</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="fecha">31/10<span class="celda-sub">sábado</span></td>
+                <td>Parcial 1</td><td>Matemática</td>
+                <td><span class="evento-badge ev-parcial"><i class="marca m-rombo"></i> Parcial</span></td>
+              </tr>
+              <tr>
+                <td class="fecha">07/11<span class="celda-sub">sábado</span></td>
+                <td>Parcial 1</td><td>Física</td>
+                <td><span class="evento-badge ev-parcial"><i class="marca m-rombo"></i> Parcial</span></td>
+              </tr>
+              <tr>
+                <td class="fecha">21/11<span class="celda-sub">sábado</span></td>
+                <td>Parcial 2</td><td>Matemática</td>
+                <td><span class="evento-badge ev-parcial"><i class="marca m-rombo"></i> Parcial</span></td>
+              </tr>
+              <tr>
+                <td class="fecha">28/11<span class="celda-sub">sábado</span></td>
+                <td>Parcial 2</td><td>Física</td>
+                <td><span class="evento-badge ev-parcial"><i class="marca m-rombo"></i> Parcial</span></td>
+              </tr>
+              <tr>
+                <td class="fecha">12/12<span class="celda-sub">sábado</span></td>
+                <td>Recuperatorio</td><td>Matemática y Física</td>
+                <td><span class="evento-badge ev-recu"><i class="marca m-rombo"></i> Recuperatorio</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="encabezado-exacto">
+          <b>Entregas.</b> La actividad propuesta el martes se sube al Moodle desde ese
+          mismo martes y hasta el lunes siguiente inclusive.
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="pie no-print">
+    <div class="pie-inner">
+      <strong>Ingreso Nivel Superior 2027</strong> · Instituto Politécnico Superior «General San Martín» ·
+      Cursillo de Matemática y Física · Martes virtual sincrónico, viernes presencial · Entregas en Moodle.
+    </div>
+  </footer>
+
+</div>
+
+<div id="pop" role="tooltip" aria-hidden="true"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* Octubre 2026 arranca jueves: el 9/10 cae viernes, el 13/10 martes
+     y los cinco exámenes caen sábado. */
+  var MESES = [
+    {y:2026, m:9,  nombre:"Octubre"},
+    {y:2026, m:10, nombre:"Noviembre"},
+    {y:2026, m:11, nombre:"Diciembre"}
+  ];
+  var DOW = ["L","M","MI","J","V","S","D"];
+  var NOMBRE_MES = ["enero","febrero","marzo","abril","mayo","junio","julio",
+                    "agosto","septiembre","octubre","noviembre","diciembre"];
+  var NOMBRE_DIA = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+
+  var MARTES  = ["2026-10-13","2026-10-20","2026-10-27",
+                 "2026-11-03","2026-11-10","2026-11-17","2026-11-24"];
+  var VIERNES = ["2026-10-16","2026-10-23","2026-10-30",
+                 "2026-11-06","2026-11-13","2026-11-20","2026-11-27"];
+
+  var EV = {};
+
+  EV["2026-10-09"] = {
+    tipo:"inicio", marca:"m-anillo", badge:"Inicio · Presencial",
+    items:[["18:00–21:00","Encuentro presencial de apertura"]],
+    nota:"Presentación de la plataforma Moodle."
+  };
+
+  MARTES.forEach(function(k){
+    EV[k] = {
+      tipo:"virtual", marca:"m-punto", badge:"Virtual sincrónico",
+      items:[["18:00–19:30","Consulta virtual Matemática"],
+             ["19:30–21:00","Consulta virtual Física"]],
+      nota:"Se introduce el tema y se propone la actividad de la semana."
+    };
+  });
+
+  VIERNES.forEach(function(k){
+    EV[k] = {
+      tipo:"presencial", marca:"m-barra", badge:"Presencial · Consulta",
+      items:[["18:00–19:30","Consulta presencial Matemática"],
+             ["19:30–21:00","Consulta presencial Física"]],
+      nota:"La actividad propuesta el martes se entrega en Moodle hasta el lunes."
+    };
+  });
+
+  var EXAMENES = {
+    "2026-10-31":["parcial","Parcial 1","Matemática"],
+    "2026-11-07":["parcial","Parcial 1","Física"],
+    "2026-11-21":["parcial","Parcial 2","Matemática"],
+    "2026-11-28":["parcial","Parcial 2","Física"],
+    "2026-12-12":["recu","Recuperatorio","Matemática y Física"]
+  };
+  Object.keys(EXAMENES).forEach(function(k){
+    var e = EXAMENES[k];
+    EV[k] = {
+      tipo:e[0], marca:"m-rombo", badge:e[1],
+      items:[["Materia", e[2]]],
+      aria: e[1] + " de " + e[2],
+      nota: e[0] === "recu"
+        ? "Única instancia de recuperación de ambas materias."
+        : "Evaluación parcial, sábado."
+    };
+  });
+
+  /* Feriados: se pintan como fin de semana. Ninguno pisa un día de cursada
+     (el 12/10 y el 23/11 caen lunes, y en diciembre ya sólo queda el 12). */
+  var FERIADOS = {
+    "2026-10-12":["Día del Respeto a la Diversidad Cultural", ""],
+    "2026-11-23":["Día de la Soberanía Nacional", "Trasladado del viernes 20."],
+    "2026-12-07":["Puente turístico", "Día no laborable, sujeto a confirmación oficial."],
+    "2026-12-08":["Inmaculada Concepción de María", ""],
+    "2026-12-25":["Navidad", ""]
+  };
+  Object.keys(FERIADOS).forEach(function(k){
+    var f = FERIADOS[k];
+    EV[k] = {
+      tipo:"feriado", marca:"m-punto", badge:"Feriado",
+      items:[["Feriado", f[0]]],
+      aria:"Feriado: " + f[0],
+      nota:f[1]
+    };
+  });
+
+  function clave(y,m,d){
+    return y + "-" + ("0"+(m+1)).slice(-2) + "-" + ("0"+d).slice(-2);
+  }
+
+  var cal = document.getElementById("cal");
+
+  MESES.forEach(function(M){
+    var art = document.createElement("article");
+    art.className = "mes";
+
+    var h3 = document.createElement("h3");
+    h3.appendChild(document.createTextNode(M.nombre));
+    var anio = document.createElement("span");
+    anio.textContent = M.y;
+    h3.appendChild(anio);
+    art.appendChild(h3);
+
+    var fila = document.createElement("div");
+    fila.className = "dow";
+    fila.setAttribute("aria-hidden","true");
+    DOW.forEach(function(d,i){
+      var s = document.createElement("span");
+      s.textContent = d;
+      if(i >= 5) s.className = "finde";
+      fila.appendChild(s);
+    });
+    art.appendChild(fila);
+
+    var grilla = document.createElement("div");
+    grilla.className = "dias";
+
+    var primero = new Date(M.y, M.m, 1);
+    var offset = (primero.getDay() + 6) % 7;          // la semana arranca en lunes
+    var total = new Date(M.y, M.m + 1, 0).getDate();
+
+    for(var i = 0; i < offset; i++){
+      var hueco = document.createElement("div");
+      hueco.className = "dia hueco";
+      hueco.setAttribute("aria-hidden","true");
+      grilla.appendChild(hueco);
+    }
+
+    for(var d = 1; d <= total; d++){
+      var wd = new Date(M.y, M.m, d).getDay();
+      var k = clave(M.y, M.m, d);
+      var ev = EV[k];
+
+      var celda = document.createElement("div");
+      celda.className = "dia" + ((wd === 0 || wd === 6) ? " finde" : "");
+
+      var num = document.createElement("span");
+      num.textContent = d;
+      celda.appendChild(num);
+
+      var marca = document.createElement("i");
+      marca.className = "marca " + (ev ? ev.marca : "m-punto");
+      celda.appendChild(marca);
+
+      if(ev){
+        celda.className += " ev ev-" + ev.tipo;
+        celda.tabIndex = 0;
+        celda.setAttribute("role","button");
+        celda.dataset.clave = k;
+        celda.dataset.titulo = NOMBRE_DIA[wd].charAt(0).toUpperCase() +
+                               NOMBRE_DIA[wd].slice(1) + " " + d + " de " + NOMBRE_MES[M.m];
+        celda.setAttribute("aria-label",
+          celda.dataset.titulo + " — " + (ev.aria ||
+            ev.badge + ": " + ev.items.map(function(it){ return it[0] + " " + it[1]; }).join("; ")));
+      }
+
+      grilla.appendChild(celda);
+    }
+
+    art.appendChild(grilla);
+    cal.appendChild(art);
+  });
+
+  /* ---- Popover ---- */
+  var pop = document.getElementById("pop");
+  var actual = null;
+
+  function pintar(celda){
+    var ev = EV[celda.dataset.clave];
+    if(!ev) return;
+    pop.innerHTML = "";
+
+    var badge = document.createElement("span");
+    badge.className = "evento-badge ev-" + ev.tipo;
+    var mk = document.createElement("i");
+    mk.className = "marca " + ev.marca;
+    badge.appendChild(mk);
+    badge.appendChild(document.createTextNode(" " + ev.badge));
+    pop.appendChild(badge);
+
+    var t = document.createElement("div");
+    t.className = "pop-titulo";
+    t.textContent = celda.dataset.titulo;
+    pop.appendChild(t);
+
+    var ul = document.createElement("ul");
+    ev.items.forEach(function(it){
+      var li = document.createElement("li");
+      var b = document.createElement("b");
+      b.textContent = it[0];
+      var s = document.createElement("span");
+      s.textContent = it[1];
+      li.appendChild(b); li.appendChild(s);
+      ul.appendChild(li);
+    });
+    pop.appendChild(ul);
+
+    if(ev.nota){
+      var n = document.createElement("div");
+      n.className = "pop-nota";
+      n.textContent = ev.nota;
+      pop.appendChild(n);
+    }
+  }
+
+  /* Se mide después de pintar: si no, el ancho es el del contenido anterior
+     y el popover queda pegado al borde en la primera apertura. */
+  function ubicar(celda){
+    var r = celda.getBoundingClientRect();
+    var p = pop.getBoundingClientRect();
+    var m = 10;
+    var x = r.left + r.width/2 - p.width/2;
+    x = Math.max(m, Math.min(x, window.innerWidth - p.width - m));
+    var y = r.top - p.height - 10;
+    if(y < m) y = r.bottom + 10;
+    pop.style.left = Math.round(x) + "px";
+    pop.style.top  = Math.round(y) + "px";
+  }
+
+  function abrir(celda){
+    if(actual === celda) return;
+    actual = celda;
+    pintar(celda);
+    pop.setAttribute("data-abierto","true");
+    pop.setAttribute("aria-hidden","false");
+    ubicar(celda);
+  }
+
+  function cerrar(){
+    actual = null;
+    pop.setAttribute("data-abierto","false");
+    pop.setAttribute("aria-hidden","true");
+  }
+
+  cal.addEventListener("mouseover", function(e){
+    var c = e.target.closest(".dia.ev");
+    if(c) abrir(c);
+  });
+  cal.addEventListener("mouseout", function(e){
+    var c = e.target.closest(".dia.ev");
+    if(c && !c.contains(e.relatedTarget)) cerrar();
+  });
+  cal.addEventListener("focusin", function(e){
+    var c = e.target.closest(".dia.ev");
+    if(c) abrir(c);
+  });
+  cal.addEventListener("focusout", cerrar);
+  cal.addEventListener("click", function(e){
+    var c = e.target.closest(".dia.ev");
+    if(c){ (actual === c) ? cerrar() : abrir(c); } else { cerrar(); }
+  });
+  cal.addEventListener("keydown", function(e){
+    if(e.key === "Enter" || e.key === " "){
+      var c = e.target.closest(".dia.ev");
+      if(c){ e.preventDefault(); (actual === c) ? cerrar() : abrir(c); }
+    }
+  });
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape") cerrar(); });
+  window.addEventListener("scroll", function(){ if(actual) ubicar(actual); }, {passive:true});
+  window.addEventListener("resize", cerrar);
+})();
+</script>
+
+</body>
+</html>

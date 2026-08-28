@@ -216,7 +216,7 @@ p{margin:0}
 .dia.hueco{visibility:hidden}
 .dia.finde{background:var(--crema-200);color:var(--tinta-tenue)}
 .dia .marca{opacity:0}
-.dia.ev{cursor:pointer}
+.dia.ev{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .dia.ev .marca{opacity:1}
 
 /* Los cinco exámenes caen sábado, así que estos pares .dia.ev-* tienen que ir
@@ -267,7 +267,7 @@ p{margin:0}
 
 /* ---- Popover del día ---- */
 #pop{
-  position:fixed;z-index:50;max-width:290px;background:#fff;
+  position:fixed;z-index:50;max-width:min(290px,calc(100vw - 20px));background:#fff;
   border:1px solid var(--borde);border-top:3px solid var(--vino-700);
   border-radius:var(--radio);padding:16px 18px;box-shadow:var(--sombra);
   pointer-events:none;opacity:0;transition:opacity .15s ease;
@@ -288,6 +288,17 @@ p{margin:0}
   .contenido{padding:24px 14px}
   .panel{padding:26px 22px}
   .cabecera-inner{padding:10px 14px}
+}
+
+/* Celular: con el padding de escritorio la celda queda en 41px, por debajo
+   del mínimo de 44 para tocar con el dedo. Se recorta el padding y se suelta
+   el aspect-ratio, así el alto compensa lo que falta de ancho. */
+@media (max-width:420px){
+  .contenido{padding:20px 10px}
+  .mes{padding:16px 12px 14px}
+  .dow,.dias{gap:3px}
+  .dia{aspect-ratio:auto;min-height:46px}
+  .leyenda{gap:6px}
 }
 
 /* ============================================================
@@ -722,6 +733,8 @@ p{margin:0}
     pop.style.top  = Math.round(y) + "px";
   }
 
+  var abiertoEn = 0;
+
   function abrir(celda){
     if(actual === celda) return;
     actual = celda;
@@ -729,6 +742,7 @@ p{margin:0}
     pop.setAttribute("data-abierto","true");
     pop.setAttribute("aria-hidden","false");
     ubicar(celda);
+    abiertoEn = Date.now();
   }
 
   function cerrar(){
@@ -737,22 +751,35 @@ p{margin:0}
     pop.setAttribute("aria-hidden","true");
   }
 
-  cal.addEventListener("mouseover", function(e){
-    var c = e.target.closest(".dia.ev");
-    if(c) abrir(c);
-  });
-  cal.addEventListener("mouseout", function(e){
-    var c = e.target.closest(".dia.ev");
-    if(c && !c.contains(e.relatedTarget)) cerrar();
-  });
+  /* Sólo se engancha el hover donde el hover existe de verdad. En un celular
+     el navegador emula mouseover al tocar, y como después llega el click el
+     popover se abría y se cerraba dentro del mismo gesto. */
+  if(window.matchMedia("(hover: hover)").matches){
+    cal.addEventListener("mouseover", function(e){
+      var c = e.target.closest(".dia.ev");
+      if(c) abrir(c);
+    });
+    cal.addEventListener("mouseout", function(e){
+      var c = e.target.closest(".dia.ev");
+      if(c && !c.contains(e.relatedTarget)) cerrar();
+    });
+  }
+
   cal.addEventListener("focusin", function(e){
     var c = e.target.closest(".dia.ev");
     if(c) abrir(c);
   });
   cal.addEventListener("focusout", cerrar);
+
+  /* El click cierra sólo si el popover ya estaba abierto de antes: si lo acaba
+     de abrir el foco (o el hover) en este mismo gesto, se deja abierto. */
   cal.addEventListener("click", function(e){
     var c = e.target.closest(".dia.ev");
-    if(c){ (actual === c) ? cerrar() : abrir(c); } else { cerrar(); }
+    if(!c){ cerrar(); return; }
+    if(actual === c && Date.now() - abiertoEn > 350){ cerrar(); } else { abrir(c); }
+  });
+  document.addEventListener("click", function(e){
+    if(!e.target.closest(".dia.ev")) cerrar();
   });
   cal.addEventListener("keydown", function(e){
     if(e.key === "Enter" || e.key === " "){

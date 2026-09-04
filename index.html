@@ -414,7 +414,6 @@ p{margin:0}
   var MAT = ["18:00–19:30","Matemática"];
   var FIS = ["20:00–21:30","Física"];
   var QUI = ["18:00–19:30","Química"];
-  var QUI_V = ["20:00–21:30","Química"];
 
   /* Tres esquemas de cursada. Las carreras sólo eligen uno. */
   var ESQUEMAS = {
@@ -430,7 +429,7 @@ p{margin:0}
     quimica:{
       lunes:[QUI],
       martes:[MAT],
-      viernes:[MAT, QUI_V],
+      viernes:[MAT, QUI],
       parciales:[["2026-10-31","Parcial 1","Matemática"],
                  ["2026-11-07","Parcial 1","Química"],
                  ["2026-11-21","Parcial 2","Matemática"],

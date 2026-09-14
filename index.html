@@ -107,7 +107,7 @@ p{margin:0}
   background:#fff;border:1px solid var(--borde);border-radius:var(--radio);
   padding:42px 44px;box-shadow:var(--sombra);
 }
-.panel-hero{position:relative;overflow:hidden;border-top:4px solid var(--vino-700)}
+.panel-hero{position:relative;overflow:hidden;border-top:4px solid var(--vino-700);margin-top:28px}
 .panel-hero .marca-agua{
   position:absolute;top:-30px;right:-30px;width:280px;opacity:.06;pointer-events:none;
 }
@@ -132,23 +132,23 @@ p{margin:0}
 }
 
 .seccion{margin-top:34px}
+.landing > .seccion:first-child{margin-top:0}
 .seccion-titulo{font-size:1.5rem;color:var(--vino-900)}
 .seccion-head{margin-bottom:18px;max-width:70ch}
 
-/* ---- Pestañas de carrera (patrón .admin-nav del portal) ---- */
+/* ---- Selector de carrera: grilla de 4 columnas x 2 filas ---- */
 .carreras-nav{
-  display:flex;flex-wrap:wrap;gap:6px;
-  border-bottom:1px solid var(--borde);padding-bottom:12px;margin-bottom:24px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:8px;
 }
 .carreras-nav button{
   font-family:var(--sans);font-size:.92rem;font-weight:600;
   color:var(--vino-700);background:transparent;
-  border:1px solid transparent;border-radius:var(--radio-sm);
-  padding:8px 14px;cursor:pointer;touch-action:manipulation;
+  border:1px solid var(--borde);border-radius:var(--radio-sm);
+  padding:10px 12px;cursor:pointer;touch-action:manipulation;
   transition:background .15s ease,color .15s ease,border-color .15s ease;
 }
-.carreras-nav button:hover{background:var(--vino-50)}
-.carreras-nav button[aria-selected="true"]{background:var(--vino-700);color:#fff}
+.carreras-nav button:hover{background:var(--vino-50);border-color:var(--vino-500)}
+.carreras-nav button[aria-selected="true"]{background:var(--vino-700);color:#fff;border-color:var(--vino-700)}
 .carreras-nav button:active{transform:translateY(1px)}
 .carreras-nav button:focus-visible{
   outline:none;border-color:var(--vino-600);box-shadow:0 0 0 3px var(--vino-100);
@@ -180,15 +180,12 @@ p{margin:0}
 .ev-inicio    {background:var(--cat-verde-bg);  color:var(--cat-verde-tx)}
 .ev-parcial   {background:var(--vino-700);      color:#fff}
 .ev-recu      {background:var(--cat-rojo-bg);   color:var(--cat-rojo-tx)}
-.ev-feriado   {background:var(--cat-gris-bg);   color:var(--cat-gris-tx);border-color:var(--borde)}
 .ev-finde     {background:var(--crema-200);     color:var(--tinta-tenue);border-color:var(--borde)}
 
-/* La información no depende sólo del color */
+/* Todo día marcado lleva la misma pelotita rellena: lo que cambia es
+   sólo el color de fondo/texto de su categoría, nunca la forma. */
 .marca{flex:none;display:block;background:currentColor}
-.m-punto {width:5px;height:5px;border-radius:50%}
-.m-barra {width:11px;height:4px;border-radius:2px}
-.m-rombo {width:7px;height:7px;border-radius:2px;transform:rotate(45deg)}
-.m-anillo{width:7px;height:7px;border-radius:50%;background:transparent;box-shadow:0 0 0 2px currentColor inset}
+.m-punto{width:5px;height:5px;border-radius:50%}
 
 .leyenda{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
 .leyenda .evento-badge{font-size:.72rem;padding:5px 11px}
@@ -234,8 +231,6 @@ p{margin:0}
 .dia.ev-inicio    {background:var(--cat-verde-bg);  color:var(--cat-verde-tx);  border-width:1.5px;border-color:currentColor}
 .dia.ev-parcial   {background:var(--vino-700);      color:#fff}
 .dia.ev-recu      {background:var(--cat-rojo-bg);   color:var(--cat-rojo-tx);   border-width:1.5px;border-color:currentColor}
-/* El feriado se lee como fin de semana aunque caiga entre semana. */
-.dia.ev-feriado   {background:var(--crema-200);     color:var(--tinta-tenue)}
 
 .dia.ev{transition:box-shadow .15s ease,border-color .15s ease,transform .05s ease}
 .dia.ev:hover{box-shadow:0 0 0 1.5px var(--vino-500) inset}
@@ -289,6 +284,7 @@ p{margin:0}
   .contenido{padding:24px 14px}
   .panel{padding:26px 22px}
   .cabecera-inner{padding:10px 14px}
+  .carreras-nav{grid-template-columns:repeat(2,1fr)}
 }
 
 /* Celular: con el padding de escritorio la celda queda en 41px, por debajo
@@ -339,17 +335,23 @@ p{margin:0}
   <main class="contenido">
     <div class="landing">
 
+      <section class="seccion">
+        <div class="seccion-head">
+          <div class="kicker">Carreras</div>
+          <h2 class="seccion-titulo">Elegí tu carrera</h2>
+        </div>
+        <div class="carreras-nav" role="tablist" aria-label="Carreras" id="nav"></div>
+      </section>
+
       <section class="panel panel-hero">
         <img class="marca-agua" src="assets/isotipo.png" alt="" aria-hidden="true" onerror="this.remove()">
         <div class="hero-kicker">Cursillo de ingreso · Nivel Superior</div>
         <h1 class="hero-titulo">Ingreso Nivel Superior 2027</h1>
-        <p class="lead">Encuentros virtuales y consultas presenciales, de octubre a diciembre.</p>
+        <p class="lead">Encuentros virtuales y presenciales, de octubre a diciembre.</p>
 
         <div class="dash-grilla">
           <div class="dash-tarjeta"><span class="rotulo">Inicio</span><span class="valor">09/10</span></div>
           <div class="dash-tarjeta"><span class="rotulo">Cursada</span><span class="valor">13/10 – 27/11</span></div>
-          <div class="dash-tarjeta"><span class="rotulo">Matemática</span><span class="valor">18:00</span></div>
-          <div class="dash-tarjeta"><span class="rotulo">Recuperatorio</span><span class="valor">12/12</span></div>
         </div>
 
         <div class="encabezado-exacto">
@@ -357,15 +359,7 @@ p{margin:0}
         </div>
       </section>
 
-      <section class="seccion">
-        <div class="seccion-head">
-          <div class="kicker">Carreras</div>
-          <h2 class="seccion-titulo">Elegí tu carrera</h2>
-        </div>
-
-        <div class="carreras-nav" role="tablist" aria-label="Carreras" id="nav"></div>
-        <div id="panel" role="tabpanel" tabindex="0"></div>
-      </section>
+      <div id="panel" role="tabpanel" tabindex="0"></div>
 
     </div>
   </main>
@@ -422,8 +416,8 @@ p{margin:0}
       viernes:[MAT, FIS],
       parciales:[["2026-10-31","Parcial 1","Matemática"],
                  ["2026-11-07","Parcial 1","Física"],
-                 ["2026-11-21","Parcial 2","Matemática"],
-                 ["2026-11-28","Parcial 2","Física"]],
+                 ["2026-12-04","Parcial 2","Matemática"],
+                 ["2026-12-12","Parcial 2","Física"]],
       recuperatorio:"Matemática y Física"
     },
     quimica:{
@@ -432,7 +426,7 @@ p{margin:0}
       viernes:[MAT, QUI],
       parciales:[["2026-10-31","Parcial 1","Matemática"],
                  ["2026-11-07","Parcial 1","Química"],
-                 ["2026-11-21","Parcial 2","Matemática"],
+                 ["2026-12-04","Parcial 2","Matemática"],
                  ["2026-11-28","Parcial 2","Química"]],
       recuperatorio:"Matemática y Química"
     },
@@ -440,7 +434,7 @@ p{margin:0}
       martes:[MAT],
       viernes:[MAT],
       parciales:[["2026-10-31","Parcial 1","Matemática"],
-                 ["2026-11-21","Parcial 2","Matemática"]],
+                 ["2026-12-04","Parcial 2","Matemática"]],
       recuperatorio:"Matemática"
     }
   };
@@ -460,12 +454,17 @@ p{margin:0}
     return y + "-" + ("0"+(m+1)).slice(-2) + "-" + ("0"+d).slice(-2);
   }
 
+  function diaSemanaDeClave(k){
+    var p = k.split("-").map(Number);
+    return NOMBRE_DIA[new Date(p[0], p[1]-1, p[2]).getDay()];
+  }
+
   /* Los eventos se arman por carrera: cambian las materias, los horarios,
      el día del encuentro virtual y las fechas de parcial. */
   function armarEventos(esq){
     var EV = {};
 
-    EV["2026-10-09"] = {tipo:"inicio", marca:"m-anillo", badge:"Inicio",
+    EV["2026-10-09"] = {tipo:"inicio", marca:"m-punto", badge:"Inicio",
                         items:[["18:00","Encuentro presencial"]]};
 
     if(esq.lunes){
@@ -477,20 +476,20 @@ p{margin:0}
       EV[k] = {tipo:"virtual", marca:"m-punto", badge:"Virtual", items:esq.martes};
     });
     VIERNES.forEach(function(k){
-      EV[k] = {tipo:"presencial", marca:"m-barra", badge:"Presencial", items:esq.viernes};
+      EV[k] = {tipo:"presencial", marca:"m-punto", badge:"Presencial", items:esq.viernes};
     });
 
     esq.parciales.forEach(function(p){
-      EV[p[0]] = {tipo:"parcial", marca:"m-rombo", badge:p[1],
+      EV[p[0]] = {tipo:"parcial", marca:"m-punto", badge:p[1],
                   items:[["Materia", p[2]]], aria:p[1] + " de " + p[2]};
     });
-    EV["2026-12-12"] = {tipo:"recu", marca:"m-rombo", badge:"Recuperatorio",
+    EV["2026-12-19"] = {tipo:"recu", marca:"m-punto", badge:"Recuperatorio",
                         items:[["Materia", esq.recuperatorio]],
                         aria:"Recuperatorio de " + esq.recuperatorio};
 
+    /* Sin marca ni popover: el feriado se lee igual que un fin de semana. */
     Object.keys(FERIADOS).forEach(function(k){
-      EV[k] = {tipo:"feriado", marca:"m-punto", badge:"Feriado",
-               items:[["Feriado", FERIADOS[k]]], aria:"Feriado: " + FERIADOS[k]};
+      EV[k] = {tipo:"feriado"};
     });
 
     return EV;
@@ -550,12 +549,14 @@ p{margin:0}
       var wd = new Date(M.y, M.m, d).getDay();
       var k = clave(M.y, M.m, d);
       var ev = EV[k];
+      var esFeriado = ev && ev.tipo === "feriado";
 
-      var celda = el("div","dia" + ((wd === 0 || wd === 6) ? " finde" : ""));
+      var celda = el("div","dia" + ((wd === 0 || wd === 6 || esFeriado) ? " finde" : ""));
       celda.appendChild(el("span", null, d));
       celda.appendChild(el("i","marca " + (ev ? ev.marca : "m-punto")));
 
-      if(ev){
+      /* El feriado queda igual que un fin de semana: sin foco ni popover. */
+      if(ev && !esFeriado){
         celda.className += " ev ev-" + ev.tipo;
         celda.tabIndex = 0;
         celda.setAttribute("role","button");
@@ -581,7 +582,6 @@ p{margin:0}
 
     /* Modalidad */
     var s1 = el("section","seccion");
-    s1.style.marginTop = "0";
     var h1 = el("div","seccion-head");
     h1.appendChild(el("div","kicker","Modalidad"));
     h1.appendChild(el("h2","seccion-titulo", carrera.nombre));
@@ -590,7 +590,7 @@ p{margin:0}
     var g = el("div","grilla-pasos");
     if(esq.lunes) g.appendChild(tarjetaDia("Lunes · Virtual","virtual","m-punto", esq.lunes));
     g.appendChild(tarjetaDia("Martes · Virtual","virtual","m-punto", esq.martes));
-    g.appendChild(tarjetaDia("Viernes · Presencial","presencial","m-barra", esq.viernes));
+    g.appendChild(tarjetaDia("Viernes · Presencial","presencial","m-punto", esq.viernes));
     s1.appendChild(g);
     frag.appendChild(s1);
 
@@ -601,15 +601,15 @@ p{margin:0}
     s2.appendChild(h2);
 
     var leyenda = el("div","leyenda");
-    [["virtual","m-punto","Virtual"],["presencial","m-barra","Presencial"],
-     ["inicio","m-anillo","Inicio"],["parcial","m-rombo","Parcial"],
-     ["recu","m-rombo","Recuperatorio"],["finde","m-punto","Feriado"]].forEach(function(l){
+    [["virtual","m-punto","Virtual"],["presencial","m-punto","Presencial"],
+     ["inicio","m-punto","Inicio"],["parcial","m-punto","Parcial"],
+     ["recu","m-punto","Recuperatorio"]].forEach(function(l){
       var b = el("span","evento-badge ev-" + l[0]);
       b.appendChild(el("i","marca " + l[1]));
       b.appendChild(document.createTextNode(" " + l[2]));
       leyenda.appendChild(b);
     });
-    leyenda.appendChild(el("span","evento-badge ev-finde","Fin de semana"));
+    leyenda.appendChild(el("span","evento-badge ev-finde","Fin de semana y feriados"));
     s2.appendChild(leyenda);
 
     var cal = el("div","cal-grilla");
@@ -632,13 +632,13 @@ p{margin:0}
     tabla.appendChild(thead);
 
     var tbody = el("tbody");
-    var filas = esq.parciales.concat([["2026-12-12","Recuperatorio", esq.recuperatorio]]);
+    var filas = esq.parciales.concat([["2026-12-19","Recuperatorio", esq.recuperatorio]]);
     filas.forEach(function(f){
       var p = f[0].split("-");
       var tr = el("tr");
       var td = el("td","fecha");
       td.appendChild(document.createTextNode(p[2] + "/" + p[1]));
-      td.appendChild(el("span","celda-sub","sábado"));
+      td.appendChild(el("span","celda-sub", diaSemanaDeClave(f[0])));
       tr.appendChild(td);
       tr.appendChild(el("td", null, f[1]));
       tr.appendChild(el("td", null, f[2]));
@@ -674,7 +674,7 @@ p{margin:0}
     b.type = "button";
     b.setAttribute("role","tab");
     b.setAttribute("aria-selected","false");
-    b.tabIndex = -1;
+    b.tabIndex = i === 0 ? 0 : -1;
     b.addEventListener("click", function(){ seleccionar(i, false); });
     nav.appendChild(b);
     botones.push(b);
@@ -791,11 +791,12 @@ p{margin:0}
   window.addEventListener("scroll", function(){ if(actual) ubicar(actual); }, {passive:true});
   window.addEventListener("resize", cerrar);
 
-  /* Arranque: la carrera del hash, si viene una. */
-  var inicial = 0;
+  /* Arranque: en blanco por defecto. Sólo se preselecciona si el link
+     trae el hash de una carrera puntual. */
+  var inicial = -1;
   var h = location.hash.replace("#","");
   CARRERAS.forEach(function(c,i){ if(c.id === h) inicial = i; });
-  seleccionar(inicial, false);
+  if(inicial >= 0) seleccionar(inicial, false);
 })();
 </script>
 

@@ -254,6 +254,7 @@ p{margin:0}
   color:var(--tinta-suave);margin-top:18px;
 }
 .encabezado-exacto b{color:var(--vino-900)}
+.encabezado-exacto .materias-linea{margin-top:6px}
 
 .pie{
   background:var(--crema-200);border-top:1px solid var(--borde);
@@ -355,7 +356,8 @@ p{margin:0}
         </div>
 
         <div class="encabezado-exacto">
-          <b>Viernes 9 de octubre:</b> encuentro presencial de apertura.
+          <div><b>Viernes 9 de octubre:</b> encuentro presencial de apertura.</div>
+          <div class="materias-linea" id="materias-linea" hidden></div>
         </div>
       </section>
 
@@ -427,7 +429,7 @@ p{margin:0}
       parciales:[["2026-10-31","Parcial 1","Matemática"],
                  ["2026-11-07","Parcial 1","Química"],
                  ["2026-12-04","Parcial 2","Matemática"],
-                 ["2026-11-28","Parcial 2","Química"]],
+                 ["2026-12-12","Parcial 2","Química"]],
       recuperatorio:"Matemática y Química"
     },
     matematica:{
@@ -577,6 +579,12 @@ p{margin:0}
   function construirPanel(carrera){
     var esq = ESQUEMAS[carrera.esquema];
     EV_ACTUAL = armarEventos(esq);
+
+    var materias = document.getElementById("materias-linea");
+    materias.innerHTML = "";
+    materias.appendChild(el("b", null, "Materias: "));
+    materias.appendChild(document.createTextNode(esq.recuperatorio + "."));
+    materias.hidden = false;
 
     var frag = document.createDocumentFragment();
 

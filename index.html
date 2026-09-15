@@ -117,18 +117,17 @@ p{margin:0}
 }
 .lead{font-size:1.05rem;color:var(--tinta-suave);max-width:62ch;margin-top:14px}
 
-.dash-grilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));gap:14px;margin-top:26px}
-.dash-tarjeta{
-  background:var(--vino-50);border:1px solid var(--vino-100);
-  border-radius:var(--radio-sm);padding:14px 16px;
+/* Lista de datos del bloque inicial: son oraciones, no cifras, así que
+   van en cuerpo (Inter) con un acento lateral en vez de la tarjeta
+   .dash-tarjeta que usa mono para valores cortos. */
+.hero-datos{display:flex;flex-direction:column;gap:12px;margin-top:26px}
+.hero-datos > div{border-left:3px solid var(--vino-100);padding-left:14px}
+.hero-datos dt{
+  font-family:var(--sans);font-weight:700;font-size:.82rem;
+  color:var(--vino-700);margin:0;
 }
-.dash-tarjeta .rotulo{
-  display:block;font-size:.75rem;font-weight:600;letter-spacing:.06em;
-  text-transform:uppercase;color:var(--tinta-suave);
-}
-.dash-tarjeta .valor{
-  display:block;font-family:var(--mono);font-weight:500;font-size:1.3rem;
-  color:var(--vino-900);line-height:1.2;margin-top:4px;
+.hero-datos dd{
+  margin:2px 0 0;font-size:.95rem;color:var(--tinta-suave);
 }
 
 .seccion{margin-top:34px}
@@ -254,7 +253,6 @@ p{margin:0}
   color:var(--tinta-suave);margin-top:18px;
 }
 .encabezado-exacto b{color:var(--vino-900)}
-.encabezado-exacto .materias-linea{margin-top:6px}
 
 .pie{
   background:var(--crema-200);border-top:1px solid var(--borde);
@@ -350,14 +348,14 @@ p{margin:0}
         <h1 class="hero-titulo">Ingreso Nivel Superior 2027</h1>
         <p class="lead">Encuentros virtuales y presenciales, de octubre a diciembre.</p>
 
-        <div class="dash-grilla">
-          <div class="dash-tarjeta"><span class="rotulo">Inicio</span><span class="valor">09/10</span></div>
-          <div class="dash-tarjeta"><span class="rotulo">Cursada</span><span class="valor">13/10 – 27/11</span></div>
-        </div>
+        <dl class="hero-datos">
+          <div><dt>Encuentro inicial</dt><dd>9 de octubre (presencial · 18:00)</dd></div>
+          <div><dt>Clases</dt><dd>13 de octubre al 27 de noviembre (híbrido · ver horarios debajo)</dd></div>
+          <div><dt>Evaluaciones y recuperatorio</dt><dd>fechas detalladas hasta el 19 de diciembre (presenciales · debajo)</dd></div>
+        </dl>
 
-        <div class="encabezado-exacto">
-          <div><b>Viernes 9 de octubre:</b> encuentro presencial de apertura.</div>
-          <div class="materias-linea" id="materias-linea" hidden></div>
+        <div class="encabezado-exacto" id="materias-box" hidden>
+          <div class="materias-linea" id="materias-linea"></div>
         </div>
       </section>
 
@@ -585,7 +583,7 @@ p{margin:0}
     materias.innerHTML = "";
     materias.appendChild(el("b", null, "Materias: "));
     materias.appendChild(document.createTextNode(esq.recuperatorio + "."));
-    materias.hidden = false;
+    document.getElementById("materias-box").hidden = false;
 
     var frag = document.createDocumentFragment();
 

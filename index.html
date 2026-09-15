@@ -253,6 +253,12 @@ p{margin:0}
   color:var(--tinta-suave);margin-top:18px;
 }
 .encabezado-exacto b{color:var(--vino-900)}
+.encabezado-exacto a{color:var(--vino-900);text-decoration-color:var(--vino-100)}
+.encabezado-exacto a:hover{text-decoration-color:var(--vino-600)}
+.encabezado-exacto ul{margin:0;padding-left:1.1em}
+.encabezado-exacto li{margin-top:2px}
+.encabezado-exacto li::marker{color:var(--vino-600)}
+.encabezado-exacto + .encabezado-exacto{margin-top:10px}
 
 .pie{
   background:var(--crema-200);border-top:1px solid var(--borde);
@@ -352,7 +358,14 @@ p{margin:0}
           <div><dt>Encuentro inicial</dt><dd>9 de octubre (presencial · 18:00)</dd></div>
           <div><dt>Clases</dt><dd>13 de octubre al 27 de noviembre (híbrido · ver horarios debajo)</dd></div>
           <div><dt>Evaluaciones y recuperatorio</dt><dd>fechas detalladas hasta el 19 de diciembre (presenciales · debajo)</dd></div>
+          <div><dt>Dónde</dt><dd>Ayacucho 1667 - Rosario (instancias presenciales)</dd></div>
         </dl>
+
+        <div class="encabezado-exacto">
+          Todo el material de estudio y el link para las clases virtuales estará
+          disponible en <a href="https://campus.ips.edu.ar" target="_blank" rel="noopener">campus.ips.edu.ar</a>.
+          La matriculación será automática.
+        </div>
 
         <div class="encabezado-exacto" id="materias-box" hidden>
           <div class="materias-linea" id="materias-linea"></div>
@@ -419,7 +432,7 @@ p{margin:0}
                  ["2026-11-07","Parcial 1","Física"],
                  ["2026-12-04","Parcial 2","Matemática"],
                  ["2026-12-12","Parcial 2","Física"]],
-      recuperatorio:"Matemática y Física"
+      recuperatorioMaterias:["Matemática","Física"]
     },
     quimica:{
       lunes:[QUI_L],
@@ -429,16 +442,24 @@ p{margin:0}
                  ["2026-11-07","Parcial 1","Química"],
                  ["2026-12-04","Parcial 2","Matemática"],
                  ["2026-12-12","Parcial 2","Química"]],
-      recuperatorio:"Matemática y Química"
+      recuperatorioMaterias:["Matemática","Química"]
     },
     matematica:{
       martes:[MAT],
       viernes:[MAT],
       parciales:[["2026-10-31","Parcial 1","Matemática"],
                  ["2026-12-04","Parcial 2","Matemática"]],
-      recuperatorio:"Matemática"
+      recuperatorioMaterias:["Matemática"]
     }
   };
+
+  /* Sábado → 09:00, salvo el único parcial que cae viernes, a las 18:00. */
+  function horarioParcial(fecha){
+    return diaSemanaDeClave(fecha) === "viernes" ? "18:00" : "09:00";
+  }
+  /* Recuperatorio: Matemática siempre primero a las 9, la segunda
+     materia (cuando la hay) a las 10:30. */
+  var HORA_RECU = ["09:00","10:30"];
 
   var CARRERAS = [
     {id:"mecatronica",           nombre:"Mecatrónica",             esquema:"fisica"},
@@ -481,12 +502,15 @@ p{margin:0}
     });
 
     esq.parciales.forEach(function(p){
+      var hora = horarioParcial(p[0]);
       EV[p[0]] = {tipo:"parcial", marca:"m-punto", badge:p[1],
-                  items:[["Materia", p[2]]], aria:p[1] + " de " + p[2]};
+                  items:[[hora, p[2]]], aria:p[1] + " de " + p[2] + ", " + hora + "hs"};
     });
+
+    var itemsRecu = esq.recuperatorioMaterias.map(function(m,i){ return [HORA_RECU[i], m]; });
     EV["2026-12-19"] = {tipo:"recu", marca:"m-punto", badge:"Recuperatorio",
-                        items:[["Materia", esq.recuperatorio]],
-                        aria:"Recuperatorio de " + esq.recuperatorio};
+                        items:itemsRecu,
+                        aria:"Recuperatorio: " + itemsRecu.map(function(it){ return it[1] + " " + it[0] + "hs"; }).join(", ")};
 
     /* Sin marca ni popover: el feriado se lee igual que un fin de semana. */
     Object.keys(FERIADOS).forEach(function(k){
@@ -579,10 +603,11 @@ p{margin:0}
     var esq = ESQUEMAS[carrera.esquema];
     EV_ACTUAL = armarEventos(esq);
 
+    var nombreMaterias = esq.recuperatorioMaterias.join(" y ");
     var materias = document.getElementById("materias-linea");
     materias.innerHTML = "";
-    materias.appendChild(el("b", null, "Materias: "));
-    materias.appendChild(document.createTextNode(esq.recuperatorio + "."));
+    materias.appendChild(el("b", null, "Materias " + carrera.nombre + ": "));
+    materias.appendChild(document.createTextNode(nombreMaterias + "."));
     document.getElementById("materias-box").hidden = false;
 
     var frag = document.createDocumentFragment();
@@ -630,16 +655,29 @@ p{margin:0}
     h3.appendChild(el("h2","seccion-titulo","Evaluaciones"));
     s3.appendChild(h3);
 
+    var nota = el("div","encabezado-exacto");
+    var ul = el("ul");
+    ["Presenciales.","Se aprueba con 6.","Se pueden recuperar todas las instancias."].forEach(function(t){
+      ul.appendChild(el("li", null, t));
+    });
+    nota.appendChild(ul);
+    s3.appendChild(nota);
+
     var wrap = el("div","tabla-wrap");
     var tabla = el("table","tabla");
     var thead = el("thead");
     var trh = el("tr");
-    ["Fecha","Instancia","Materia"].forEach(function(t){ trh.appendChild(el("th", null, t)); });
+    ["Fecha","Instancia","Materia","Horario"].forEach(function(t){ trh.appendChild(el("th", null, t)); });
     thead.appendChild(trh);
     tabla.appendChild(thead);
 
     var tbody = el("tbody");
-    var filas = esq.parciales.concat([["2026-12-19","Recuperatorio", esq.recuperatorio]]);
+    var filas = esq.parciales.map(function(p){
+      return [p[0], p[1], p[2], horarioParcial(p[0])];
+    });
+    esq.recuperatorioMaterias.forEach(function(m,i){
+      filas.push(["2026-12-19","Recuperatorio", m, HORA_RECU[i]]);
+    });
     filas.forEach(function(f){
       var p = f[0].split("-");
       var tr = el("tr");
@@ -649,6 +687,7 @@ p{margin:0}
       tr.appendChild(td);
       tr.appendChild(el("td", null, f[1]));
       tr.appendChild(el("td", null, f[2]));
+      tr.appendChild(el("td", null, f[3]));
       tbody.appendChild(tr);
     });
     tabla.appendChild(tbody);

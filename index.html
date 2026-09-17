@@ -343,8 +343,7 @@ p{margin:0}
 
       <section class="seccion">
         <div class="seccion-head">
-          <div class="kicker">Carreras</div>
-          <h2 class="seccion-titulo">Elegí tu carrera</h2>
+          <h2 class="seccion-titulo">Elegí tu carrera universitaria</h2>
         </div>
         <div class="carreras-nav" role="tablist" aria-label="Carreras" id="nav"></div>
       </section>
@@ -356,9 +355,9 @@ p{margin:0}
         <p class="lead">Encuentros virtuales y presenciales, de octubre a diciembre.</p>
 
         <dl class="hero-datos">
-          <div><dt>Encuentro inicial</dt><dd>9 de octubre (presencial · 18:00)</dd></div>
-          <div><dt>Clases</dt><dd>13 de octubre al 27 de noviembre (híbrido · ver horarios debajo)</dd></div>
-          <div><dt>Evaluaciones y recuperatorio</dt><dd>fechas detalladas hasta el 19 de diciembre (presenciales · debajo)</dd></div>
+          <div><dt>Encuentro inicial</dt><dd>9 de octubre (presencial · 18:00 h)</dd></div>
+          <div><dt>Clases</dt><dd>Del 13 de octubre al 27 de noviembre, con modalidad híbrida (ver horarios en el calendario)</dd></div>
+          <div><dt>Evaluaciones y Recuperatorio</dt><dd>Fechas presenciales detalladas hasta el 19 de diciembre inclusive (ver horarios en el calendario)</dd></div>
           <div><dt>Dónde</dt><dd>Ayacucho 1667 - Rosario (instancias presenciales)</dd></div>
         </dl>
 
@@ -419,10 +418,10 @@ p{margin:0}
     "2026-12-25":"Navidad"
   };
 
-  var MAT   = ["18:00–19:30","Matemática"];
-  var FIS   = ["20:00–21:30","Física"];
-  var QUI_L = ["18:00–19:30","Química"];
-  var QUI_V = ["20:00–21:30","Química"];
+  var MAT   = ["18:00–19:30 h","Matemática"];
+  var FIS   = ["20:00–21:30 h","Física"];
+  var QUI_L = ["18:00–19:30 h","Química"];
+  var QUI_V = ["20:00–21:30 h","Química"];
 
   /* Tres esquemas de cursada. Las carreras sólo eligen uno. */
   var ESQUEMAS = {
@@ -456,11 +455,11 @@ p{margin:0}
 
   /* Sábado → 09:00, salvo el único parcial que cae viernes, a las 18:00. */
   function horarioParcial(fecha){
-    return diaSemanaDeClave(fecha) === "viernes" ? "18:00" : "09:00";
+    return diaSemanaDeClave(fecha) === "viernes" ? "18:00 h" : "09:00 h";
   }
   /* Recuperatorio: Matemática siempre primero a las 9, la segunda
      materia (cuando la hay) a las 10:30. */
-  var HORA_RECU = ["09:00","10:30"];
+  var HORA_RECU = ["09:00 h","10:30 h"];
 
   var CARRERAS = [
     {id:"mecatronica",           nombre:"Mecatrónica",             esquema:"fisica"},
@@ -488,7 +487,7 @@ p{margin:0}
     var EV = {};
 
     EV["2026-10-09"] = {tipo:"inicio", marca:"m-punto", badge:"Inicio",
-                        items:[["18:00","Encuentro presencial"]]};
+                        items:[["18:00 h","Encuentro presencial"]]};
 
     if(esq.lunes){
       LUNES.forEach(function(k){
@@ -505,13 +504,13 @@ p{margin:0}
     esq.parciales.forEach(function(p){
       var hora = horarioParcial(p[0]);
       EV[p[0]] = {tipo:"parcial", marca:"m-punto", badge:p[1],
-                  items:[[hora, p[2]]], aria:p[1] + " de " + p[2] + ", " + hora + "hs"};
+                  items:[[hora, p[2]]], aria:p[1] + " de " + p[2] + ", " + hora};
     });
 
     var itemsRecu = esq.recuperatorioMaterias.map(function(m,i){ return [HORA_RECU[i], m]; });
     EV["2026-12-19"] = {tipo:"recu", marca:"m-punto", badge:"Recuperatorio",
                         items:itemsRecu,
-                        aria:"Recuperatorio: " + itemsRecu.map(function(it){ return it[1] + " " + it[0] + "hs"; }).join(", ")};
+                        aria:"Recuperatorio: " + itemsRecu.map(function(it){ return it[1] + " " + it[0]; }).join(", ")};
 
     /* Sin marca ni popover: el feriado se lee igual que un fin de semana. */
     Object.keys(FERIADOS).forEach(function(k){
@@ -607,7 +606,7 @@ p{margin:0}
     var nombreMaterias = esq.recuperatorioMaterias.join(" y ");
     var materias = document.getElementById("materias-linea");
     materias.innerHTML = "";
-    materias.appendChild(el("b", null, "Materias " + carrera.nombre + ": "));
+    materias.appendChild(el("b", null, "Materias para " + carrera.nombre + ": "));
     materias.appendChild(document.createTextNode(nombreMaterias + "."));
     document.getElementById("materias-box").hidden = false;
 
@@ -653,12 +652,12 @@ p{margin:0}
     /* Evaluaciones */
     var s3 = el("section","seccion");
     var h3 = el("div","seccion-head");
-    h3.appendChild(el("h2","seccion-titulo","Evaluaciones"));
+    h3.appendChild(el("h2","seccion-titulo","Evaluaciones y Recuperatorio"));
     s3.appendChild(h3);
 
     var nota = el("div","encabezado-exacto");
     var ul = el("ul");
-    ["Presenciales.","Se aprueba con 6.","Se pueden recuperar todas las instancias."].forEach(function(t){
+    ["Presenciales.","Se aprueba con 6.","Se pueden recuperar todas las instancias en un único recuperatorio."].forEach(function(t){
       ul.appendChild(el("li", null, t));
     });
     nota.appendChild(ul);
